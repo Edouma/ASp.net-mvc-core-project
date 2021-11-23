@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Students.Models.student>
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>StudentId</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Course</th>
+                        <th>Departments</th>
+                        
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                    <tr>
+                        <td>@student.studentId </td>
+                        <td>@student.FirstName </td>
+                        <td>@student.LastName </td>
+                        <td>@student.Course </td>
+                        
+
+                    </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </body>
+    </html>

@@ -1,0 +1,102 @@
+﻿@model Students.Models.Course1
+
+
+<div class="modal fade" id="AddcourseModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title"> Add Course</h6>
+                <button class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+
+                <form method="post" asp-action="AddNew" asp-controller="Course">
+                    <div class="form-group">
+                        <label asp-for="CourseName">CourseName:</label>
+                        <input asp-for="CourseName" placeholder="Enter Course Name" class="form-control" />
+                        <span asp-validation-for="CourseName" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="form-group">
+
+                            <button type="submit" class="btn btn-primary btn-sm">Add Course </button>
+                            <button class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+                <form method="post" asp-action="AddNew" asp-controller="Course" name="f1" onsubmit="return validate()">
+                    <div class="form-group">
+                        <label asp-for="CourseName">CourseName:</label>
+                        <input asp-for="CourseName" placeholder="Enter Course Name" class="form-control" />
+                        <span id="nameloc" asp-validation-for="CourseName" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+
+                            <table>
+                                <tr>
+                                    <td>Enter Name:</td>
+                                    <td>
+                                        <input type="text" name="name" />
+                                        <span id="nameloc"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Enter Password:</td>
+                                    <td>
+                                        <input type="password" name="password" />
+                                        <span id="passwordloc"></span>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="2"><input type="submit" value="register" /></td></tr>
+                            </table>
+
+
+                            <button type="button" class="btn btn-primary btn-sm">Add Course </button>
+                            <button class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+        
+        </div>
+
+    </div>
+
+</div>
+@section Scripts{
+   
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+<script>
+    function validate() {
+        var name = document.f1.name.value;
+        var password = document.f1.password.value;
+        var status = false;
+
+        if (name.length < 3) {
+            document.getElementById("nameloc").innerHTML =
+                " <img src='unchecked.gif'/> Please Enter Course Name";
+            status = false;
+        } else {
+            document.getElementById("nameloc").innerHTML = " <img src='checked.gif'/>";
+            status = true;
+        }
+        if (password.length < 6) {
+            document.getElementById("passwordloc").innerHTML =
+                " <img src='unchecked.gif'/> Password must be at least 6 char long";
+            status = false;
+        } else {
+            document.getElementById("passwordloc").innerHTML = " <img src='checked.gif'/>";
+        }
+        return status;
+    }
+</script>

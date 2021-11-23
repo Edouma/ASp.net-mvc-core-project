@@ -1,0 +1,164 @@
+﻿
+@model IEnumerable<Students.Models.student>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+
+    <a class="btn btn-outline-success btn-sm" id="myposition" asp-area="" asp-controller="Register" asp-action="AddNew" data-toggle="modal" data-target="#studentModal"> Add New Student </a>
+    <h6 class="text-info">All Students Details</h6>
+
+    <div>
+        <table class="table table-hover table-sm">
+
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Course</th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.FirstName </td>
+                    <td>@student.LastName </td>
+                    <td>@student.Course </td>
+                    <td>
+
+                        <a class="btn btn-success btn-sm responsive-content" asp-action="Edit" asp-route-id="@student.studentId"> Edit</a>
+                        <a class="btn btn-danger btn-sm responsive-content" asp-action="Delete" asp-route-id="@student.studentId"> Delete</a>
+
+                    </td>
+
+                </tr>
+            }
+
+
+        </table>
+
+    </div>
+
+    <div class="modal fade" id="studentModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"> Add Student</h6>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form action="CourseController/AddNew" name="f1" onsubmit="return validate()">
+
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input placeholder="Enter First Name" class="form-control" name="first" id="actionH" />
+                         </div>
+                        <span id="firstloc" class="text-danger"></span>
+
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input placeholder="Enter Last Name" class="form-control" name="last" id="actionH" />
+                        </div>
+                        <span id="lastloc" class="text-danger"></span>
+
+                        <div class="form-group">
+                            <label>Course:</label>
+                            <input placeholder="Enter Course Taken" class="form-control" name="course" id="actionH" />
+                        </div>
+                        <span id="courseloc" class="text-danger"></span>
+
+
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary btnsave">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+</html>
+
+@section Scripts{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+
+    @*<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+}
+
+<script>
+    function validate() {
+        var first = document.f1.first.value;
+        var last = document.f1.last.value;
+        var course = document.f1.course.value;
+        var status = false;
+
+        if (first.length < 3) {
+            document.getElementById("firstloc").innerHTML =
+                        /*" <img src='unchecked.gif'/>*/ "First Name cannot be blank";
+            status = false;
+
+        }
+        if (last.length < 3) {
+            document.getElementById("lastloc").innerHTML =
+                        /*" <img src='unchecked.gif'/>*/ "Last Name cannot be blank";
+            status = false;
+
+        }
+        if (course.length < 6) {
+            document.getElementById("courseloc").innerHTML =
+                        /*" <img src='unchecked.gif'/>*/ "Course Name cannot be blank";
+            status = false;
+        }
+
+        else {
+
+            $(document).ready(function () {
+                $(".btnsave").click(function () {
+                    var student = document.getElementById("actionH").value;
+
+                    $.ajax({
+                        method: 'Post',
+                        url: '/Register/AddNew',//change this
+                        dataType: 'json',
+                        data: { student },
+                        beforeSend: function () {
+                            $('#loader').css("visibility", "visible");
+                        },
+                        cache: false,
+                        error: function (xhr, status) {
+                            console.log(status);
+                            console.log(xhr.responseText);
+                            alert(xhr.responseText);
+                            window.location.reload();
+
+                        }
+                    });
+
+                });
+
+            });
+
+        }
+        return status;
+    }
+
+</script>

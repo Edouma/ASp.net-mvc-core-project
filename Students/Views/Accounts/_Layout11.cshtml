@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Students</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+
+        <input type="checkbox" id="sidebar-toggle">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h6 class="brand">
+                    <span class="ti-unlink"></span>
+                    <span>easywire</span>
+                </h6>
+                <label for="sidebar-toggle" class="ti-menu-alt"></label>
+            </div>
+
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="">
+                            <span class="ti-home"></span>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-face-smile"></span>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-agenda"></span>
+                            <span>Course</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-clipboard"></span>
+                            <span>Leaves</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-folder"></span>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-time"></span>
+                            <span>Timesheet</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-book"></span>
+                            <span>Contacts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <span class="ti-settings"></span>
+                            <span>Account</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+
+        <header>
+            <div class="search-wrapper">
+                <span class="ti-search"></span>
+                <input type="search" placeholder="Search">
+            </div>
+
+            <div class="social-icons">
+                <span class="ti-bell"></span>
+                <span class="ti-comment"></span>
+                <div></div>
+            </div>
+        </header>
+
+
+    </div>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+</body>
+</html>

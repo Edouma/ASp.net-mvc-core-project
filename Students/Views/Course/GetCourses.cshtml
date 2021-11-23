@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Students.Models.Course1>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+
+    <a class="btn btn-outline-success btn-sm" id="myposition" asp-area="" asp-controller="Register" asp-action="AddNew" data-toggle="modal" data-target="#AddcourseModal"> Add New Course </a>
+    <h5 class="text-info">All Courses Details</h5>
+
+    <div>
+        <table class="table table-hover table-sm">
+
+            <tr>
+                <th>CourseId</th>
+                <th>CourseName</th>
+            </tr>
+
+            @foreach (var course1 in Model)
+            {
+                <tr>
+                    <td>@course1.Id </td>
+                    <td>@course1.CourseName </td>
+
+                    <td>
+                        <a class="btn btn-success btn-sm responsive-content mybotton" asp-action="Edit" asp-route-id="@course1.Id"><span class="ti-pencil-alt"></span> Edit</a>
+                        <a class="btn btn-danger btn-sm responsive-content mybotton" asp-action="Delete" asp-route-id="@course1.Id"> Delete</a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+    <div class="modal fade" id="AddcourseModal" tabindex="-1" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title"> Add Course</h6>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form action="CourseController/AddNew" name="f1" onsubmit="return validate()">
+
+                        <div class="form-group">
+                            <label>CourseName:</label>
+                            <input placeholder="Enter Course Name" class="form-control" name="password" id="actionH" />
+                        </div>
+                        <span id="passwordloc" class="text-danger"></span>
+
+                        
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn btn-primary btn-sm btnsave">Save changes</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+
+                        </div>
+
+                    </form>
+            </div>
+            
+        </div>
+        </div
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   
+</body>
+
+</html>
+
+@section Scripts{
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+    
+     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+
+    <script>
+        function validate() {
+           // var name = document.f1.name.value;
+            var password = document.f1.password.value;
+            var status = false;
+            
+                if (password.length < 6) {
+                    document.getElementById("passwordloc").innerHTML =
+                        /*" <img src='unchecked.gif'/>*/ "Course Name cannot be blank";
+                    status = false;
+                } else {
+
+                    $(document).ready(function () {
+                        $(".btnsave").click(function () {
+                            var CourseName = document.getElementById("actionH").value;
+                            
+                            $.ajax({
+                                method: 'Post',
+                                url: '/Course/AddNew',//change this
+                                dataType: 'json',
+                                data: { CourseName },
+                                beforeSend: function () {
+                                    $('#loader').css("visibility", "visible");
+                                },
+                                cache: false,
+                                error: function (xhr, status) {
+                                    console.log(status);
+                                    console.log(xhr.responseText);
+                                    alert(xhr.responseText);
+                                    window.location.reload();
+
+                                }
+                            });
+                            
+                        });
+
+                    });
+                                        
+                }
+            return status;
+        }
+
+    </script>
+
+

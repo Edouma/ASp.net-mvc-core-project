@@ -1,0 +1,61 @@
+﻿
+@model IEnumerable<Students.Models.student>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+
+   <h6 class="text-info">Student's Fee Details</h6>
+
+    <div>
+        <table class="table table-hover table-sm" id="myTable">
+
+            <tr>
+                <th>Student Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Amount Paid</th>
+                <th>Date paid</th>
+                <th>Balance</th>
+            </tr>
+        </table>
+
+    </div>
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+           
+                $.ajax({
+                    type: 'GET',
+                    url: '/Fee/Student_Fee',
+                    contentType: 'application/json', // this
+                    datatype: 'html',
+                   // data: { clients: JSON.stringify(clients) }, // and this
+                    success: function (data) {
+                        //
+                        console.log(data);
+
+                        var pato = JSON.stringify(data[0]);
+                        console.log(pato);
+
+                        for (var i = 0; i < data.length; i++) {
+                            var row = $('<tr><td>' + data[i].id + '</td><td>' + data[i].firstName + '</td><td>' + data[i].lastName  + '</td><td>' + data[i].amountPaid  + '</td><td>' + data[i].datePaid + '</td><td>'+ data[i].balance + '</td></tr>');
+                            $('#myTable').append(row);
+                        }
+
+                    }
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

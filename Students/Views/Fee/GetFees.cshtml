@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Students.Models.Fees.Fee>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+
+    <a class="btn btn-outline-success btn-sm" id="myposition" asp-area="" asp-controller="Fee" asp-action="AddNew" data-toggle="modal" data-target="#AddFee"> Make Payment </a>
+    <h5 class="text-info">Payment Details</h5>
+
+    <div>
+        <table class="table table-hover table-sm table-bordered">
+
+            <tr>
+                <th>FeeId</th>
+                <th>Amount Paid</th>
+                <th>Date Paid</th>
+                <th>Balance</th>
+                <th>StudentId</th>
+
+
+            </tr>
+
+            @foreach (var fee in Model)
+            {
+        <tr>
+
+            <td>@fee.FeeId </td>
+            <td>@fee.AmountPaid </td>
+            <td>@fee.Date_Paid</td>
+            <td>@fee.Balance</td>
+            <td>@fee.StudentId</td>
+
+
+            @*<td>
+                <a class="btn btn-success btn-sm responsive-content mybotton" asp-action="Edit" asp-route-id="@fee.FeeId"> Edit</a>
+                <a class="btn btn-danger btn-sm responsive-content mybotton" asp-action="Delete" asp-route-id="@fee.FeeId"> Delete</a>
+            </td>*@
+
+        </tr>
+            }
+
+
+        </table>
+
+    </div>
+    <div>
+
+        @*<partial name="_Fee" model="new Fee()" />*@
+
+
+    </div>
+
+</body>
+</html>
